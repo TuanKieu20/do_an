@@ -147,7 +147,7 @@ class SignUpForm extends StatelessWidget {
                         return CustomAlert(
                             labelText: res.message,
                             onPressed: () {
-                              Get.back();
+                              Navigator.of(context).pop();
                             });
                       });
                 }

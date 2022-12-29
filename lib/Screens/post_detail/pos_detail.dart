@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import '../../Helper/styles.dart';
 import '../../constants.dart';
 import '../../controllers/home_controller.dart';
+import '../../routes.dart';
 
 class PostDetail extends StatelessWidget {
   const PostDetail({Key? key}) : super(key: key);
@@ -13,10 +14,18 @@ class PostDetail extends StatelessWidget {
     final postItem = Get.arguments;
     final homecontroller = Get.find<HomeController>();
     final posts = homecontroller.listPost;
-    logger.e(Get.arguments);
     return Scaffold(
       appBar: AppBar(
-        leading: const SizedBox(),
+        centerTitle: true,
+        leadingWidth: 100,
+        leading: IconButton(
+            onPressed: () {
+              Get.rootDelegate.toNamed(Routes.HOME);
+            },
+            icon: const Icon(
+              Icons.arrow_back_outlined,
+              color: Colors.white,
+            )),
         title: Text(
           'Bài viết mới',
           style: mikado600.copyWith(),

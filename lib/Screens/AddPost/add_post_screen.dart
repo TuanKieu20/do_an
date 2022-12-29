@@ -1,3 +1,4 @@
+import 'package:do_an/repository/home_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:do_an/components/custom_loading.dart';
 import 'package:get/get.dart';
@@ -27,11 +28,20 @@ class _AddPostScreenState extends State<AddPostScreen> {
               appBar: AppBar(
                 elevation: 0,
                 backgroundColor: kPrimaryLightColor,
+                centerTitle: true,
                 title: Text(
                   'Thêm bài viết mới',
                   style: mikado600.copyWith(color: Colors.black),
                 ),
-                // leadingWidth: 100,
+                leadingWidth: 100,
+                leading: IconButton(
+                    onPressed: () {
+                      Get.rootDelegate.toNamed(Routes.HOME);
+                    },
+                    icon: const Icon(
+                      Icons.arrow_back_outlined,
+                      color: Colors.black,
+                    )),
                 // leading: Center(
                 //     child: Text(
                 //   'Cancel',

@@ -278,73 +278,82 @@ class TabBodyView extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.find<HomeController>();
     return GetX<HomeController>(builder: (builder) {
-      return ListView.builder(
-        itemCount: controller.listPost.length,
-        itemBuilder: (context, index) {
-          return InkWell(
-            onTap: () {
-              logger.d(controller.listPost[index].content);
-              Get.rootDelegate.toNamed(Routes.POST_DETAIL,
-                  arguments: {'item': controller.listPost[index]});
-              controller.changeIndex(index);
-            },
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                const SizedBox(height: 50),
-                // Text(
-                //   item.name!,
-                //   style: TextStyle(color: Colors.black),
-                // ),
-                Container(
-                  width: double.infinity,
-                  height: 230,
-                  margin: const EdgeInsets.symmetric(horizontal: 50),
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-                  decoration: BoxDecoration(
-                      color: Colors.black.withOpacity(0.7),
-                      borderRadius: BorderRadius.circular(20),
-                      image: const DecorationImage(
-                          opacity: 0.3,
-                          image: NetworkImage('assets/images/demo.jpeg'),
-                          fit: BoxFit.cover)),
+      return (controller.listPost.isEmpty)
+          ? Center(
+              child: Text(
+                'Chưa có bài viết nào',
+                style: mikado600.copyWith(fontSize: 28),
+              ),
+            )
+          : ListView.builder(
+              itemCount: controller.listPost.length,
+              itemBuilder: (context, index) {
+                return InkWell(
+                  onTap: () {
+                    logger.d(controller.listPost[index].content);
+                    Get.rootDelegate.toNamed(Routes.POST_DETAIL,
+                        arguments: {'item': controller.listPost[index]});
+                    controller.changeIndex(index);
+                  },
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Text(
-                        // item.category!.name ?? "",
-                        "Bài viết mới",
-                        maxLines: 2,
-                        style: mikado700.copyWith(
-                            color: Colors.white, fontSize: 21),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            controller.user.name ?? '',
-                            maxLines: 2,
-                            style: mikado700.copyWith(
-                                color: Colors.white, fontSize: 21),
-                          ),
-                          Text(
-                            Helper.getDateTime(
-                                controller.listPost[index].createdAt ?? ""),
-                            maxLines: 2,
-                            style: mikado700.copyWith(
-                                color: Colors.white, fontSize: 21),
-                          ),
-                        ],
+                      const SizedBox(height: 50),
+                      // Text(
+                      //   item.name!,
+                      //   style: TextStyle(color: Colors.black),
+                      // ),
+                      Container(
+                        width: double.infinity,
+                        height: 230,
+                        margin: const EdgeInsets.symmetric(horizontal: 50),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 20),
+                        decoration: BoxDecoration(
+                            color: Colors.black.withOpacity(0.7),
+                            borderRadius: BorderRadius.circular(20),
+                            image: const DecorationImage(
+                                opacity: 0.3,
+                                image: NetworkImage('assets/images/demo.jpeg'),
+                                fit: BoxFit.cover)),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              // item.category!.name ?? "",
+                              controller.listPost[index].content.toString(),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: mikado700.copyWith(
+                                  color: Colors.white, fontSize: 21),
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  controller.user.name ?? '',
+                                  maxLines: 2,
+                                  style: mikado700.copyWith(
+                                      color: Colors.white, fontSize: 21),
+                                ),
+                                Text(
+                                  Helper.getDateTime(
+                                      controller.listPost[index].createdAt ??
+                                          ""),
+                                  maxLines: 2,
+                                  style: mikado700.copyWith(
+                                      color: Colors.white, fontSize: 21),
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
                       )
                     ],
                   ),
-                )
-              ],
-            ),
-          );
-        },
-      );
+                );
+              },
+            );
     });
   }
 }

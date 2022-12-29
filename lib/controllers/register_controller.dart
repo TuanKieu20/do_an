@@ -60,8 +60,9 @@ class RegisterController extends GetxController implements GetxService {
       if (response.statusCode == 200 && response.body['success'] == true) {
         res = ResponseModel(isSuccess: true, message: 'Success');
       } else {
-        res =
-            ResponseModel(isSuccess: false, message: response.body['message']);
+        logger.d(response.body);
+        res = ResponseModel(
+            isSuccess: false, message: 'Tài khoản này đã tồn tại!!!');
       }
       return res;
     } catch (e) {

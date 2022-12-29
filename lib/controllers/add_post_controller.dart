@@ -15,7 +15,7 @@ class PostControlelr extends GetxController {
   final formKey = GlobalKey<FormState>();
 
   final ApiClient apiClient = ApiClient();
-  final homeRepo = Get.find<HomeRepo>();
+  final homeRepo = Get.put(HomeRepo());
 
   String? validateTitle(String title) {
     if (title.isEmpty) {
@@ -55,9 +55,8 @@ class PostControlelr extends GetxController {
     } catch (e) {
       hideLoadingOverlay();
       return ResponseModel(
-        isSuccess: false,
-        message: 'false',
-      );
+          isSuccess: false,
+          message: "Không kết nối được với server! Vui lòng thử lại");
     }
   }
 }

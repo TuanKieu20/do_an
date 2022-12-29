@@ -12,7 +12,7 @@ import '../models/user_model.dart';
 import '../repository/home_repo.dart';
 
 class HomeController extends GetxController with GetTickerProviderStateMixin {
-  final homeRepo = Get.put(HomeRepo());
+  final homeRepo = Get.put(HomeRepo(), permanent: true);
 
   late User user;
   final _pref = Get.find<SharedPreferences>();
